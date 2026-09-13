@@ -1011,7 +1011,7 @@ async function _runTdB(){
   });
 
   // ── Override FPA : missions spécifiques (valeurs forcées, affichage bleu foncé) ──
-  var _FPA_OVERRIDES={'COL0025A':510,'BEN0420A':704,'BEN0421A':872,'BEN0424A':900,'BEN0427A':1568,'BEN0428A':1119,'BEN0429A':777,'BEN0430A':1345};
+  var _FPA_OVERRIDES={'COL0025A':510,'BEN0420A':704,'BEN0421A':872,'BEN0424A':900,'BEN0427A':1808,'BEN0428A':1354,'BEN0429A':1016,'BEN0430A':1584};
   missionsP.concat(projets).concat(allF5).forEach(function(m){
     var fp=_FPA_OVERRIDES[_firstPart(m)];
     if(fp!==undefined){fpas[m.nIdMission]=fp;m._fpaOverride=true;}
