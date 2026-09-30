@@ -544,12 +544,12 @@ window._gdS=async function(){
     all=all.filter(function(m){return String(m.sActivite)!=='700';});
     all=all.filter(function(m){var c=(m.sLibelleActivite||'').toString().charAt(0);return c!=='a'&&c!=='d';});
     // Missions annulees : reference commencant par 'a' minuscule -> exclues de l'extraction,
-    // SEULE exception connue : GAB0303A (facturee malgre le prefixe 'a').
+    // Plus aucune exception : GAB0303A confirmee annulee, exclue comme les autres 'a'.
     all=all.filter(function(m){
       var _ref=(m.sCodeComplet||m.sCode||'').toString().replace(/^\s+/,'');
       if(_ref.charAt(0)!=='a')return true;
       var _rUp=_ref.replace(/\s+/g,'').toUpperCase();
-      return _rUp.indexOf('GAB0303')>=0;
+      return false; /* 'a' = annulee, toujours exclue */
     });
 
     // Sort: country alphabetically, then by nIdMission (creation order)
@@ -903,12 +903,12 @@ async function _runTdB(){
   all=all.filter(function(m){var c=(m.sLibelleActivite||'').toString().charAt(0);return c!=='a'&&c!=='d';});
 
   // Missions annulees : reference commencant par 'a' minuscule -> exclues du TdB,
-  // SEULE exception connue : GAB0303A (facturee malgre le prefixe 'a').
+  // Plus aucune exception : GAB0303A confirmee annulee, exclue comme les autres 'a'.
   all=all.filter(function(m){
     var _ref=(m.sCodeComplet||m.sCode||'').toString().replace(/^\s+/,'');
     if(_ref.charAt(0)!=='a')return true;
     var _rUp=_ref.replace(/\s+/g,'').toUpperCase();
-    return _rUp.indexOf('GAB0303')>=0;
+    return false; /* 'a' = annulee, toujours exclue */
   });
   // MAR2974A annulee : exclusion totale du TdB (mission annulee)
   all=all.filter(function(m){var _r=(m.sCodeComplet||m.sCode||'').toString().replace(/\s+/g,'').toUpperCase();return _r.indexOf('MAR2974')<0;});
