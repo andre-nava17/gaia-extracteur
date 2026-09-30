@@ -1299,14 +1299,7 @@ async function _runTdB(){
     // Label 135K€ en décembre
     ctx.fillStyle='#60a5fa';ctx.font='bold 13px Calibri,Arial';ctx.textAlign='left';
     ctx.fillText('135K€',xPx(N-1)+6,yPx(budH[N-1])+5);
-    // Points "Actuel" (Total Produits / hors MAE), mai + juin + juillet + aout — reconduits a chaque
-    // extraction ; a completer avec le mois de septembre lors de la prochaine extraction (fin septembre).
-    var _actPts=[
-      {i:0,tot:42.6,pct:'65%',horsMAE:32.8,pctH:'59%'}, // 05/26 (corrige : prorata MAE 23750/365)
-      {i:1,tot:55.2,pct:'70%',horsMAE:43.4,pctH:'65%'}, // 06/26 (corrige : prorata MAE 23750/365)
-      {i:2,tot:64.0,pct:'70%',horsMAE:50.2,pctH:'64%'}, // 07/26 (corrige : prorata MAE 23750/365)
-      {i:3,tot:87.5,pct:'83%',horsMAE:55.1,pctH:'62%'}  // 08/26
-    ];
+    var _actPtsSeed=[{i:0,tot:42.6,pct:'65%',horsMAE:32.8,pctH:'59%'},{i:1,tot:55.2,pct:'70%',horsMAE:43.4,pctH:'65%'},{i:2,tot:64.0,pct:'70%',horsMAE:50.2,pctH:'64%'},{i:3,tot:87.5,pct:'83%',horsMAE:55.1,pctH:'62%'}];var _actPts=(function(){var LS_KEY='gaia_actpt_v1';var stored={};try{stored=JSON.parse(localStorage.getItem(LS_KEY)||'{}');}catch(e){stored={};}var now=new Date();var monthKey=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');var isLastDay=(new Date(now.getFullYear(),now.getMonth()+1,0)).getDate()===now.getDate();var i_now=(now.getFullYear()-2026)*12+(now.getMonth()+1-5);if(isLastDay&&now.getHours()>=17&&i_now>=0&&i_now<months.length&&!stored[monthKey]){stored[monthKey]={i:i_now,tot:+(_valS/1000).toFixed(1),pct:Math.round(_pctCon*100)+'%',horsMAE:+(_sHorsMAE/1000).toFixed(1),pctH:Math.round(_pctConHors*100)+'%'};try{localStorage.setItem(LS_KEY,JSON.stringify(stored));}catch(e){}}var merged=_actPtsSeed.slice();Object.keys(stored).forEach(function(k){var p=stored[k];if(p.i>=0&&p.i<months.length&&!merged.some(function(m){return m.i===p.i;})){merged.push(p);}});merged.sort(function(a,b){return a.i-b.i;});return merged;})();
     // Ligne + points : Total Produits (orange)
     ctx.strokeStyle='#ea580c';ctx.lineWidth=2;ctx.setLineDash([]);
     ctx.beginPath();
