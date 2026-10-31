@@ -1051,12 +1051,11 @@ async function _runTdB(){
   var _daysSinceJan1=Math.floor((new Date(today.getFullYear(),today.getMonth(),today.getDate())-_jan1)/86400000);
   if(_daysSinceJan1<0)_daysSinceJan1=0;
   var _valA=Math.round(48750/365*_daysSinceJan1);
-  var _valD=Math.round(63900/365*_daysSinceJan1);
+  var _valD=Math.round(45000/365*_daysSinceJan1);
   var _valE=Math.round(97516/365*_daysSinceJan1);
   var _nbZ=_nbMR+_nbPR;
   var _valS=_valA+Math.round(_fpaMR)+Math.round(_fpaPR);
   var _valP=_valD+_valE;
-  var _valR=_valS-_valP;
 
   // Prospection : missions de type R OU activité/nature contient "prospection", depuis 1 janv. 2026
   // Liste des codes mission à inclure d'office (peu importe ref / activité / date)
@@ -1536,7 +1535,8 @@ async function _runTdB(){
     ws1.getCell('D15').value={formula:'SUM(D11:D13)',result:_prorata+Math.round(_fpaMR)+Math.round(_fpaPR)};
     ws1.getCell('F15').value={formula:'SUM(F11:F13)',result:_bConMAE+(parseFloat(_bConMis)||0)+(parseFloat(_bConPP)||0)};
     var _cv=function(a){var v=ws1.getCell(a).value;return (v&&typeof v==='object')?(parseFloat(v.result)||0):(parseFloat(v)||0);};
-    ws1.getCell('D28').value={formula:'D15-D24',result:_cv('D15')-_cv('D24')};
+  ws1.getCell('D24').value={formula:'D21+D22',result:_valD+_valE};
+  ws1.getCell('D28').value={formula:'D15-D24',result:_cv('D15')-_cv('D24')};
     ws1.views=[{state:'normal',showGridLines:false}];
 
   function _buildSheet(ws,titre,missions){
