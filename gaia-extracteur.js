@@ -1056,7 +1056,7 @@ async function _runTdB(){
   var _nbZ=_nbMR+_nbPR;
   var _valS=_valA+Math.round(_fpaMR)+Math.round(_fpaPR);
   var _valP=_valD+_valE;
-
+  var _valR=_valS-_valP;
   // Prospection : missions de type R OU activité/nature contient "prospection", depuis 1 janv. 2026
   // Liste des codes mission à inclure d'office (peu importe ref / activité / date)
   // On compare au PREMIER segment de la référence (ex : "BEN0419A R ZG1" → "BEN0419A")
